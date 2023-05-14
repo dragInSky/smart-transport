@@ -1,10 +1,9 @@
-import sort.SortPassengersByAge;
-import sort.SortPassengersByFinishStation;
 import transport.Passenger;
 import transport.Station;
 import transport.Transport;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author draginsky
@@ -52,8 +51,13 @@ public class Main {
         }
 
         stations.add(new Station(station4, 4, false, true, null));
+        HashMap<String, Integer> route = new HashMap<>();
+        route.put("Контур", 1);
+        route.put("Митина", 2);
+        route.put("Моя", 3);
+        route.put("Маша", 4);
 
-        Transport transport = new Transport(new SortPassengersByAge(), null, stations);
+        Transport transport = new Transport(route, stations);
 
         transport.run();
     }

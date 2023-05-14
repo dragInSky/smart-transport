@@ -1,6 +1,7 @@
 package transport;
 
 import sort.ISortPassengers;
+import sort.SortPassengersByFinishStation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +18,8 @@ public class Transport {
     private final HashMap<String, Integer> route;
     private final ArrayList<Station> stations;
 
-    public Transport(ISortPassengers sorter, HashMap<String, Integer> route, ArrayList<Station> stations) {
-        this.sorter = sorter;
+    public Transport(HashMap<String, Integer> route, ArrayList<Station> stations) {
+        sorter = new SortPassengersByFinishStation(route);
         for (int i = 0; i < stations.size(); i++) {
             passengers[i] = null;
         }
@@ -31,20 +32,23 @@ public class Transport {
             unload(station);
             load(station);
             sorter.sort(passengers);
-
-            int count = 1;
-            System.out.println("\tПассажиры на остановке " + station.getName() + ":");
-            for (Passenger passenger : passengers) {
-                if (passenger != null) {
-                    System.out.print(count++ + ". (" + passenger.age() +
-                            ", " + passenger.startStationName() +
-                            ", " + passenger.finishStationName() + ")\t");
-                } else {
-                    System.out.print(count++ + ". " + "Free\t");
-                }
-            }
-            System.out.println();
+            prettyPrint(station);
         }
+    }
+
+    private void prettyPrint(Station station) {
+        int count = 1;
+        System.out.println("\tПассажиры на остановке " + station.getName() + ":");
+        for (Passenger passenger : passengers) {
+            if (passenger != null) {
+                System.out.print(count++ + ". (" + passenger.age() +
+                        ", " + passenger.startStationName() +
+                        ", " + passenger.finishStationName() + ")\t");
+            } else {
+                System.out.print(count++ + ". " + "Free\t");
+            }
+        }
+        System.out.println();
     }
 
     private void unload(Station station) {
