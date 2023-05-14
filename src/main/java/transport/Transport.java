@@ -9,13 +9,11 @@ import java.util.ArrayList;
  * @since 14.05.2023
  */
 public class Transport {
-    private final int size;
     ISortPassengers sorter;
     Passenger[] passengers;
     private final ArrayList<Station> stations;
 
     Transport(int size, ISortPassengers sorter, ArrayList<Station> stations) {
-        this.size = size;
         this.sorter = sorter;
         passengers = new Passenger[size];
         for (int i = 0; i < size; i++) {
@@ -25,14 +23,46 @@ public class Transport {
     }
 
     public void run() {
-
+        for (Station station : stations) {
+            unload(station);
+            load(station);
+            sorter.sort(passengers);
+        }
     }
 
-    private void load() {
-
+    private void unload(Station station) {
+        for (int i = 0; i < passengers.length; i++) {
+            if (passengers[i].getFinish() == station) {
+                passengers[i] = null;
+            }
+        }
     }
 
-    private void unload() {
+    private void load(Station station) {
+        for (Passenger passenger : station.getPassengers()) {
+            if (isFreeSpace()) {
+                add(passenger);
+            } else {
+                return;
+            }
+        }
+    }
 
+    private boolean isFreeSpace() {
+        for (Passenger passenger : passengers) {
+            if (passenger == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void add(Passenger passenger) {
+        for (int i = 0; i < passengers.length; i++) {
+            if (passengers[i] == null) {
+                passengers[i] = passenger;
+                break;
+            }
+        }
     }
 }

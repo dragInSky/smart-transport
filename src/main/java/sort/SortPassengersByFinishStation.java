@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class SortPassengersByFinishStation implements ISortPassengers{
     @Override
-    public void sort(ArrayList<Passenger> passengers) {
+    public void sort(Passenger[] passengers) {
 
 
     }

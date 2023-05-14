@@ -12,4 +12,8 @@ public class Passenger {
         this.start = start;
         this.finish = finish;
     }
+
+    public Station getFinish() {
+        return finish;
+    }
 }

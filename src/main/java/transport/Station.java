@@ -19,4 +19,8 @@ public class Station {
         this.isFinish = isFinish;
         this.passengers = passengers;
     }
+
+    public ArrayList<Passenger> getPassengers() {
+        return passengers;
+    }
 }
