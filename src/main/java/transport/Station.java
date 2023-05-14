@@ -12,7 +12,7 @@ public class Station {
     private final boolean isStart, isFinish;
     private final ArrayList<Passenger> passengers;
 
-    Station(String name, int number, boolean isStart, boolean isFinish, ArrayList<Passenger> passengers) {
+    public Station(String name, int number, boolean isStart, boolean isFinish, ArrayList<Passenger> passengers) {
         this.name = name;
         this.number = number;
         this.isStart = isStart;
@@ -26,5 +26,9 @@ public class Station {
 
     public String getName() {
         return name;
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

@@ -3,6 +3,7 @@ package transport;
 import sort.ISortPassengers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -10,15 +11,15 @@ import java.util.Objects;
  * @since 14.05.2023
  */
 public class Transport {
+    private final int numberOfSeats = 11;
     ISortPassengers sorter;
-    Passenger[] passengers;
-    private final ArrayList<String> route;
+    Passenger[] passengers = new Passenger[numberOfSeats];
+    private final HashMap<String, Integer> route;
     private final ArrayList<Station> stations;
 
-    Transport(int size, ISortPassengers sorter, ArrayList<String> route, ArrayList<Station> stations) {
+    public Transport(ISortPassengers sorter, HashMap<String, Integer> route, ArrayList<Station> stations) {
         this.sorter = sorter;
-        passengers = new Passenger[size];
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < stations.size(); i++) {
             passengers[i] = null;
         }
         this.route = route;
@@ -30,18 +31,34 @@ public class Transport {
             unload(station);
             load(station);
             sorter.sort(passengers);
+
+            int count = 1;
+            System.out.println("\tПассажиры на остановке " + station.getName() + ":");
+            for (Passenger passenger : passengers) {
+                if (passenger != null) {
+                    System.out.print(count++ + ". (" + passenger.age() +
+                            ", " + passenger.startStationName() +
+                            ", " + passenger.finishStationName() + ")\t");
+                } else {
+                    System.out.print(count++ + ". " + "Free\t");
+                }
+            }
+            System.out.println();
         }
     }
 
     private void unload(Station station) {
         for (int i = 0; i < passengers.length; i++) {
-            if (Objects.equals(passengers[i].getFinishStationName(), station.getName())) {
+            if (passengers[i] != null && Objects.equals(passengers[i].finishStationName(), station.getName())) {
                 passengers[i] = null;
             }
         }
     }
 
     private void load(Station station) {
+        if (station.getPassengers() == null) {
+            return;
+        }
         for (Passenger passenger : station.getPassengers()) {
             if (isFreeSpace()) {
                 add(passenger);
@@ -69,7 +86,7 @@ public class Transport {
         }
     }
 
-    public ArrayList<String> getRoute() {
+    public HashMap<String, Integer> getRoute() {
         return route;
     }
 }
