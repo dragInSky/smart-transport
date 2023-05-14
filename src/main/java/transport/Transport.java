@@ -35,7 +35,7 @@ public class Transport {
 
     private void unload(Station station) {
         for (int i = 0; i < passengers.length; i++) {
-            if (Objects.equals(passengers[i].getFinishStationName(), station.getName())) {
+            if (Objects.equals(passengers[i].finishStationName(), station.getName())) {
                 passengers[i] = null;
             }
         }
