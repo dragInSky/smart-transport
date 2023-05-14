@@ -13,7 +13,10 @@ public class SortPassengersByFinishStation extends SortPassengersByParameters {
     public void sort(Passenger[] passengers) {
         int n = passengers.length;
         for (int i = 0; i < n; i++){
-            for (int j = 1; j < n - i; j++){
+            for (int j = 1; j < n - i; j++) {
+                if (passengers[j - 1] == null || passengers[j] == null) {
+                    continue;
+                }
                 int firstPassengerStationNumber = route.get(passengers[j - 1].finishStationName());
                 int secondPassengerStationNumber = route.get(passengers[j].finishStationName());
                 if (firstPassengerStationNumber > secondPassengerStationNumber) {

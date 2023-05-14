@@ -1,3 +1,5 @@
+import sort.SortPassengersByAge;
+import sort.SortPassengersByFinishStation;
 import transport.Passenger;
 import transport.Station;
 import transport.Transport;
@@ -51,10 +53,8 @@ public class Main {
 
         stations.add(new Station(station4, 4, false, true, null));
 
-        Transport transport = new Transport(this::sort, null, stations);
+        Transport transport = new Transport(new SortPassengersByAge(), null, stations);
 
         transport.run();
     }
-
-    private void sort(Passenger[] passengers) {}
 }
