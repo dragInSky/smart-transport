@@ -1,19 +1,17 @@
 package transport;
 
 public class Passenger {
-    private final int id;
     private final int age;
-    private final Station start;
-    private final Station finish;
+    private final String startStationName;
+    private final String finishStationName;
 
-    public Passenger(int id, int age, Station start, Station finish) {
-        this.id = id;
+    public Passenger(int age, String startStationName, String finishStationName) {
         this.age = age;
-        this.start = start;
-        this.finish = finish;
+        this.startStationName = startStationName;
+        this.finishStationName = finishStationName;
     }
 
-    public Station getFinish() {
-        return finish;
+    public String getFinishStationName() {
+        return finishStationName;
     }
 }

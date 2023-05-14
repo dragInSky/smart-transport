@@ -3,6 +3,7 @@ package transport;
 import sort.ISortPassengers;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * @author draginsky
@@ -11,14 +12,16 @@ import java.util.ArrayList;
 public class Transport {
     ISortPassengers sorter;
     Passenger[] passengers;
+    private final ArrayList<String> route;
     private final ArrayList<Station> stations;
 
-    Transport(int size, ISortPassengers sorter, ArrayList<Station> stations) {
+    Transport(int size, ISortPassengers sorter, ArrayList<String> route, ArrayList<Station> stations) {
         this.sorter = sorter;
         passengers = new Passenger[size];
         for (int i = 0; i < size; i++) {
             passengers[i] = null;
         }
+        this.route = route;
         this.stations = stations;
     }
 
@@ -32,7 +35,7 @@ public class Transport {
 
     private void unload(Station station) {
         for (int i = 0; i < passengers.length; i++) {
-            if (passengers[i].getFinish() == station) {
+            if (Objects.equals(passengers[i].getFinishStationName(), station.getName())) {
                 passengers[i] = null;
             }
         }
@@ -64,5 +67,9 @@ public class Transport {
                 break;
             }
         }
+    }
+
+    public ArrayList<String> getRoute() {
+        return route;
     }
 }

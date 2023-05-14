@@ -23,4 +23,8 @@ public class Station {
     public ArrayList<Passenger> getPassengers() {
         return passengers;
     }
+
+    public String getName() {
+        return name;
+    }
 }
