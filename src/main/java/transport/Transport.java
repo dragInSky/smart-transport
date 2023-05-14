@@ -1,6 +1,7 @@
 package transport;
 
 import sort.ISortPassengers;
+import sort.SortPassengersByAge;
 import sort.SortPassengersByFinishStation;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Transport {
     private final ArrayList<Station> stations;
 
     public Transport(HashMap<String, Integer> route, ArrayList<Station> stations) {
-        sorter = new SortPassengersByFinishStation(route);
+        sorter = new SortPassengersByAge();
         for (int i = 0; i < stations.size(); i++) {
             passengers[i] = null;
         }
