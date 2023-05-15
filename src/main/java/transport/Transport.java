@@ -21,11 +21,12 @@ public class Transport {
     }
 
     public void run() {
+        ConsolePrint.routePrint();
         for (Station station : stations) {
             unload(station);
             load(station);
             sorter.sort(passengers);
-            ConsolePrint.prettyPrint(station, passengers, numberOfSeats);
+            ConsolePrint.stationStatePrint(station, passengers, numberOfSeats);
         }
     }
 
