@@ -2,7 +2,10 @@ import sort.SortPassengersByFinishStation;
 import transport.Passenger;
 import transport.Station;
 import transport.Transport;
+import util.Route;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author draginsky
@@ -10,49 +13,46 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args) {
-        new Main().action();
-    }
-
-    private void action() {
-        int station1 = 1;
-        int station2 = 2;
-        int station3 = 3;
-        int station4 = 4;
-
-        ArrayList<Station> stations = new ArrayList<>();
-        {
-            ArrayList<Passenger> passengers1 = new ArrayList<>();
-            passengers1.add(new Passenger(16, station1, station3));
-            passengers1.add(new Passenger(51, station1, station2));
-            passengers1.add(new Passenger(16, station1, station2));
-            passengers1.add(new Passenger(12, station1, station4));
-            passengers1.add(new Passenger(12, station1, station2));
-            passengers1.add(new Passenger(12, station1, station3));
-            passengers1.add(new Passenger(48, station1, station3));
-
-            stations.add(new Station("Контур", station1, passengers1));
-        }
-
-        {
-            ArrayList<Passenger> passengers2 = new ArrayList<>();
-            passengers2.add(new Passenger(21, station2, station3));
-            passengers2.add(new Passenger(20, station2, station4));
-            passengers2.add(new Passenger(21, station2, station3));
-
-            stations.add(new Station("Митина", station2, passengers2));
-        }
-
-        {
-            ArrayList<Passenger> passengers3 = new ArrayList<>();
-            passengers3.add(new Passenger(99, station3, station4));
-
-            stations.add(new Station("Моя", station3, passengers3));
-        }
-
-        stations.add(new Station("Маша", station4, null));
+        ArrayList<Station> stations = new Main().generateStations();
 
         Transport transport = new Transport(stations, new SortPassengersByFinishStation());
 
         transport.run();
+    }
+
+    public ArrayList<Station> generateStations() {
+        ArrayList<Station> stations = new ArrayList<>();
+
+        {
+            ArrayList<Passenger> passengers = (ArrayList<Passenger>) List.of(
+                    new Passenger(16, 1, 3),
+                    new Passenger(51, 1, 2),
+                    new Passenger(16, 1, 2),
+                    new Passenger(12, 1, 4),
+                    new Passenger(12, 1, 2),
+                    new Passenger(12, 1, 3),
+                    new Passenger(48, 1, 3)
+            );
+
+            stations.add(new Station(Route.route.get(1), 1, passengers));
+        }
+
+        {
+            ArrayList<Passenger> passengers = (ArrayList<Passenger>) List.of(
+                    new Passenger(21, 2, 3),
+                    new Passenger(20, 2, 4),
+                    new Passenger(21, 2, 3)
+            );
+
+            stations.add(new Station(Route.route.get(2), 2, passengers));
+        }
+
+        stations.add(new Station(Route.route.get(3), 3,
+                (ArrayList<Passenger>) List.of(new Passenger(99, 3, 4)))
+        );
+
+        stations.add(new Station(Route.route.get(4), 4, null));
+
+        return stations;
     }
 }

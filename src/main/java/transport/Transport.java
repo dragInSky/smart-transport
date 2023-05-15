@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class Transport {
     private final int numberOfSeats = 11;
-    ISortPassengers sorter;
-    ArrayList<Passenger> passengers = new ArrayList<>();
+    private final ISortPassengers sorter;
+    private final ArrayList<Passenger> passengers = new ArrayList<>();
     private final ArrayList<Station> stations;
 
     public Transport(ArrayList<Station> stations, ISortPassengers sorter) {
