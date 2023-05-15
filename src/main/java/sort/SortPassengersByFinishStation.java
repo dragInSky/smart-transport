@@ -2,6 +2,7 @@ package sort;
 
 import transport.Passenger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SortPassengersByFinishStation extends SortPassengersByParameters {
@@ -10,15 +11,12 @@ public class SortPassengersByFinishStation extends SortPassengersByParameters {
         this.route = route;
     }
     @Override
-    public void sort(Passenger[] passengers) {
-        int n = passengers.length;
+    public void sort(ArrayList<Passenger> passengers) {
+        int n = passengers.size();
         for (int i = 0; i < n; i++){
             for (int j = 1; j < n - i; j++) {
-                if (passengers[j - 1] == null || passengers[j] == null) {
-                    continue;
-                }
-                int firstPassengerStationNumber = route.get(passengers[j - 1].finishStationName());
-                int secondPassengerStationNumber = route.get(passengers[j].finishStationName());
+                int firstPassengerStationNumber = route.get(passengers.get(j - 1).finishStationName());
+                int secondPassengerStationNumber = route.get(passengers.get(j).finishStationName());
                 if (firstPassengerStationNumber > secondPassengerStationNumber) {
                     swap(passengers, j - 1, j);
                 }

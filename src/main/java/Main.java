@@ -31,7 +31,7 @@ public class Main {
             passengers1.add(new Passenger(12, station1, station3));
             passengers1.add(new Passenger(48, station1, station3));
 
-            stations.add(new Station(station1, 1, true, false, passengers1));
+            stations.add(new Station(station1, 1, passengers1));
         }
 
         {
@@ -40,17 +40,17 @@ public class Main {
             passengers2.add(new Passenger(20, station2, station4));
             passengers2.add(new Passenger(21, station2, station3));
 
-            stations.add(new Station(station2, 2, true, false, passengers2));
+            stations.add(new Station(station2, 2, passengers2));
         }
 
         {
             ArrayList<Passenger> passengers3 = new ArrayList<>();
             passengers3.add(new Passenger(99, station3, station4));
 
-            stations.add(new Station(station3, 3, true, false, passengers3));
+            stations.add(new Station(station3, 3, passengers3));
         }
 
-        stations.add(new Station(station4, 4, false, true, null));
+        stations.add(new Station(station4, 4, null));
         HashMap<String, Integer> route = new HashMap<>();
         route.put("Контур", 1);
         route.put("Митина", 2);
