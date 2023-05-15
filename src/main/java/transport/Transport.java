@@ -1,6 +1,8 @@
 package transport;
 
 import sort.ISortPassengers;
+import ui.ConsolePrint;
+
 import java.util.ArrayList;
 
 /**
@@ -23,19 +25,8 @@ public class Transport {
             unload(station);
             load(station);
             sorter.sort(passengers);
-            prettyPrint(station);
+            ConsolePrint.prettyPrint(station, passengers, numberOfSeats);
         }
-    }
-
-    private void prettyPrint(Station station) {
-        int count = 1;
-        System.out.println("\tПассажиры на остановке " + station.name() + ":");
-        for (Passenger passenger : passengers) {
-            System.out.print(count++ + ". (age: " + passenger.age() +
-                    ", start: " + passenger.startStationNum() +
-                    ", finish: " + passenger.finishStationNum() + ")\t");
-        }
-        System.out.println("Свободных мест осталось: " + (numberOfSeats - passengers.size()));
     }
 
     private void unload(Station station) {
