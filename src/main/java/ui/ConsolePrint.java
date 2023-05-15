@@ -22,8 +22,8 @@ public class ConsolePrint {
 
     public static void stationStatePrint(Station station, ArrayList<Passenger> passengers, int numberOfSeats) {
         int count = 1;
-        System.out.println("Пассажиры на остановке \"" + station.name() + "\":" +
-                "\tСвободных мест осталось: " + (numberOfSeats - passengers.size()));
+        System.out.println("Пассажиры на остановке \"" + Route.route.get(station.number()) + "\":" +
+                "\tСвободных мест: " + (numberOfSeats - passengers.size()));
         for (Passenger passenger : passengers) {
             System.out.print(count++ + ". <age: " + passenger.age() +
                     ", from: " + passenger.startStationNum() +

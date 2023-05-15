@@ -2,7 +2,6 @@ import sort.SortPassengersByFinishStation;
 import transport.Passenger;
 import transport.Station;
 import transport.Transport;
-import util.Route;
 
 import java.util.ArrayList;
 
@@ -35,7 +34,7 @@ public class Main {
                 }
             };
 
-            stations.add(new Station(Route.route.get(1), 1, passengers));
+            stations.add(new Station(1, passengers));
         }
 
         {
@@ -47,7 +46,7 @@ public class Main {
                 }
             };
 
-            stations.add(new Station(Route.route.get(2), 2, passengers));
+            stations.add(new Station(2, passengers));
         }
 
 
@@ -55,10 +54,10 @@ public class Main {
             ArrayList<Passenger> passengers = new ArrayList<>();
             passengers.add(new Passenger(99, 3, 4));
 
-            stations.add(new Station(Route.route.get(3), 3, passengers));
+            stations.add(new Station(3, passengers));
         }
 
-        stations.add(new Station(Route.route.get(4), 4, null));
+        stations.add(new Station(4, null));
 
         return stations;
     }
