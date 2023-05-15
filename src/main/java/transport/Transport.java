@@ -1,11 +1,7 @@
 package transport;
 
 import sort.ISortPassengers;
-import sort.SortPassengersByFinishStation;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * @author draginsky
@@ -15,14 +11,11 @@ public class Transport {
     private final int numberOfSeats = 11;
     ISortPassengers sorter;
     ArrayList<Passenger> passengers = new ArrayList<>();
-    private final HashMap<String, Integer> route;
     private final ArrayList<Station> stations;
 
-    public Transport(HashMap<String, Integer> route, ArrayList<Station> stations) {
-        //TODO
-        sorter = new SortPassengersByFinishStation(route);
-        this.route = route;
+    public Transport(ArrayList<Station> stations, ISortPassengers sorter) {
         this.stations = stations;
+        this.sorter = sorter;
     }
 
     public void run() {
@@ -38,9 +31,9 @@ public class Transport {
         int count = 1;
         System.out.println("\tПассажиры на остановке " + station.name() + ":");
         for (Passenger passenger : passengers) {
-            System.out.print(count++ + ". (" + passenger.age() +
-                    ", " + passenger.startStationName() +
-                    ", " + passenger.finishStationName() + ")\t");
+            System.out.print(count++ + ". (age: " + passenger.age() +
+                    ", start: " + passenger.startStationNum() +
+                    ", finish: " + passenger.finishStationNum() + ")\t");
         }
         System.out.println("Свободных мест осталось: " + (numberOfSeats - passengers.size()));
     }
@@ -48,7 +41,7 @@ public class Transport {
     private void unload(Station station) {
         ArrayList<Passenger> outComingPassengers = new ArrayList<>();
         for (Passenger passenger : passengers) {
-            if (Objects.equals(passenger.finishStationName(), station.name())) {
+            if (passenger.finishStationNum() == station.number()) {
                 outComingPassengers.add(passenger);
             }
         }
@@ -66,9 +59,5 @@ public class Transport {
                 return;
             }
         }
-    }
-
-    public HashMap<String, Integer> getRoute() {
-        return route;
     }
 }

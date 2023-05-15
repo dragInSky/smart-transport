@@ -1,9 +1,8 @@
+import sort.SortPassengersByFinishStation;
 import transport.Passenger;
 import transport.Station;
 import transport.Transport;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author draginsky
@@ -15,10 +14,10 @@ public class Main {
     }
 
     private void action() {
-        String station1 = "Контур";
-        String station2 = "Митина";
-        String station3 = "Моя";
-        String station4 = "Маша";
+        int station1 = 1;
+        int station2 = 2;
+        int station3 = 3;
+        int station4 = 4;
 
         ArrayList<Station> stations = new ArrayList<>();
         {
@@ -31,7 +30,7 @@ public class Main {
             passengers1.add(new Passenger(12, station1, station3));
             passengers1.add(new Passenger(48, station1, station3));
 
-            stations.add(new Station(station1, 1, passengers1));
+            stations.add(new Station("Контур", station1, passengers1));
         }
 
         {
@@ -40,24 +39,19 @@ public class Main {
             passengers2.add(new Passenger(20, station2, station4));
             passengers2.add(new Passenger(21, station2, station3));
 
-            stations.add(new Station(station2, 2, passengers2));
+            stations.add(new Station("Митина", station2, passengers2));
         }
 
         {
             ArrayList<Passenger> passengers3 = new ArrayList<>();
             passengers3.add(new Passenger(99, station3, station4));
 
-            stations.add(new Station(station3, 3, passengers3));
+            stations.add(new Station("Моя", station3, passengers3));
         }
 
-        stations.add(new Station(station4, 4, null));
-        HashMap<String, Integer> route = new HashMap<>();
-        route.put("Контур", 1);
-        route.put("Митина", 2);
-        route.put("Моя", 3);
-        route.put("Маша", 4);
+        stations.add(new Station("Маша", station4, null));
 
-        Transport transport = new Transport(route, stations);
+        Transport transport = new Transport(stations, new SortPassengersByFinishStation());
 
         transport.run();
     }
