@@ -3,7 +3,6 @@ package transport;
 import sort.ISortPassengers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TransportSitter {
     private final ISortPassengers sorterToExit;
@@ -16,10 +15,12 @@ public class TransportSitter {
 
     private void putInSeats(ArrayList<Passenger> passengers, ArrayList<Seat> seatsConfiguration) {
         sorterToSeats.sort(passengers);
+        int j = 0;
         for (SeatType seatType : SeatType.values()) {
             ArrayList<Seat> seats = SeatsConfigurator.getTypeSeats(seatsConfiguration, seatType);
-            for (int i = 0; i < seats.size() && i < passengers.size(); i++) {
-                passengers.get(i).seat.type = seatType;
+            for (int i = 0; i < seats.size() && j < passengers.size(); i++) {
+                passengers.get(j).futureSeatType = seatType;
+                j++;
             }
         }
     }
@@ -28,7 +29,7 @@ public class TransportSitter {
         sorterToExit.sort(passengers);
         for (Passenger passenger : passengers) {
             for (Seat seat : seatsConfiguration){
-                if (passenger.seat.type == seat.type && seat.is_empty) {
+                if (passenger.futureSeatType == seat.type && seat.is_empty) {
                     passenger.seat = seat;
                 }
             }
@@ -41,6 +42,6 @@ public class TransportSitter {
 
     public void arrangement(ArrayList<Passenger> passengers, ArrayList<Seat> seatsConfiguration) {
         putInSeats(passengers, seatsConfiguration);  // Просто указали тип места на которое сядет каждый чел
-        sortToExit(passengers, seatsConfiguration);  //
+        sortToExit(passengers, seatsConfiguration);
     }
 }

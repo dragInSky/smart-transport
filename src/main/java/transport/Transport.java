@@ -1,32 +1,24 @@
 package transport;
 
-import sort.ISortPassengers;
 import ui.ConsolePrint;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author draginsky
  * @since 14.05.2023
  */
 public class Transport {
-    private final HashMap<Seat, Integer> seatTypeWithNumber = new HashMap<>();
     private final TransportSitter transportSitter;
     private final int numberOfSeats = 11;
-    private final int numberOfStaySeats = 5;
-    private final int numberOfSitSeats = 4;
-    private final int numberOfLieSeats = 2;
+    private final ArrayList<Seat> seatsConfiguration;
     private final ArrayList<Passenger> passengers = new ArrayList<>();
     private final ArrayList<Station> stations;
 
-    public Transport(ArrayList<Station> stations, TransportSitter transportSitter) {
-        seatTypeWithNumber.put(Seat.LIE_SEAT, numberOfLieSeats);
-        seatTypeWithNumber.put(Seat.SIT_SEAT, numberOfSitSeats);
-        seatTypeWithNumber.put(Seat.STAY_SEAT, numberOfStaySeats);
-
+    public Transport(ArrayList<Station> stations, TransportSitter transportSitter,ArrayList<Seat> seatsConfiguration) {
         this.stations = stations;
         this.transportSitter = transportSitter;
+        this.seatsConfiguration = seatsConfiguration;
     }
 
     public void run() {
@@ -34,7 +26,7 @@ public class Transport {
         for (Station station : stations) {
             unload(station);
             load(station);
-            transportSitter.arrangement(passengers, seatTypeWithNumber);
+            transportSitter.arrangement(passengers, seatsConfiguration);
             ConsolePrint.stationStatePrint(station, passengers, numberOfSeats);
         }
     }
@@ -42,7 +34,7 @@ public class Transport {
     private void unload(Station station) {
         ArrayList<Passenger> outComingPassengers = new ArrayList<>();
         for (Passenger passenger : passengers) {
-            if (passenger.finishStationNum() == station.number()) {
+            if (passenger.getFinishStationNum() == station.number()) {
                 outComingPassengers.add(passenger);
             }
         }

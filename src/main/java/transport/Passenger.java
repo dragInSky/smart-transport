@@ -1,10 +1,9 @@
 package transport;
 
-class Passenger {
+public class Passenger {
     private final int age, startStationNum, finishStationNum;
     public Seat seat;
-
-
+    public SeatType futureSeatType;
     public int getAge() {
         return age;
     }

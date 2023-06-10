@@ -25,9 +25,10 @@ public class ConsolePrint {
         System.out.println("Пассажиры на остановке \"" + Route.route.get(station.number()) + "\":" +
                 "\tСвободных мест: " + (numberOfSeats - passengers.size()));
         for (Passenger passenger : passengers) {
-            System.out.print(count++ + ". <age: " + passenger.age() +
-                    ", from: " + passenger.startStationNum() +
-                    ", to: " + passenger.finishStationNum() + ">\t");
+            System.out.print(count++ + ". <age: " + passenger.getAge() +
+                    ", from: " + passenger.getStartStationNum() +
+                    ", to: " + passenger.getFinishStationNum() +
+                    ", seat:" + passenger.futureSeatType + ">\t");
         }
         System.out.println("\n");
     }

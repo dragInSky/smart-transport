@@ -10,7 +10,7 @@ public class SortPassengersByAge extends SortPassengersByParameters {
         int n = passengers.size();
         for (int i = 0; i < n; i++) {
             for (int j = 1; j < n - i; j++) {
-                if (passengers.get(j - 1).age() > passengers.get(j).age()) {
+                if (passengers.get(j - 1).getAge() < passengers.get(j).getAge()) {
                     swap(passengers, j - 1, j);
                 }
             }
