@@ -21,6 +21,10 @@ public class TransportSitter {
         int j = 0;
         for (SeatType seatType : SeatType.values()) {
             ArrayList<Seat> seats = SeatsConfigurator.getTypeSeats(seatsConfiguration, seatType);
+            for (Seat seat : seats) {
+                seat.is_empty = true;
+            }
+
             for (int i = 0; i < seats.size() && j < passengers.size(); i++) {
                 passengers.get(j).futureSeatType = seatType;
                 j++;
