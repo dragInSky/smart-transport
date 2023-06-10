@@ -15,7 +15,7 @@ public class Transport {
     private final ArrayList<Passenger> passengers = new ArrayList<>();
     private final ArrayList<Station> stations;
 
-    public Transport(ArrayList<Station> stations, TransportSitter transportSitter,ArrayList<Seat> seatsConfiguration) {
+    public Transport(ArrayList<Station> stations, TransportSitter transportSitter, ArrayList<Seat> seatsConfiguration) {
         this.stations = stations;
         this.transportSitter = transportSitter;
         this.seatsConfiguration = seatsConfiguration;

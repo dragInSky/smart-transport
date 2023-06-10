@@ -4,6 +4,8 @@ import sort.ISortPassengers;
 
 import java.util.ArrayList;
 
+import ui.ConsolePrint;
+
 public class TransportSitter {
     private final ISortPassengers sorterToExit;
     private final ISortPassengers sorterToSeats;
@@ -11,6 +13,7 @@ public class TransportSitter {
     public TransportSitter(ISortPassengers sorterToExit, ISortPassengers sorterToSeats) {
         this.sorterToExit = sorterToExit;
         this.sorterToSeats = sorterToSeats;
+        ConsolePrint.sortPrint(sorterToExit, sorterToSeats);
     }
 
     private void putInSeats(ArrayList<Passenger> passengers, ArrayList<Seat> seatsConfiguration) {

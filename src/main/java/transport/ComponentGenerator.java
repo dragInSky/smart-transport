@@ -3,16 +3,27 @@ package transport;
 import java.util.ArrayList;
 
 public class ComponentGenerator {
+    private static final int lieSeatNumber = 2;
+    private static final int sitSeatNumber = 3;
+    private static final int staySeatNumber = 2;
 
     public static ArrayList<Seat> generateSeatsConfiguration() {
         ArrayList<Seat> seatsConfiguration = new ArrayList<>();
-        seatsConfiguration.add(new Seat(SeatType.LIE_SEAT, true, 1));
-        seatsConfiguration.add(new Seat(SeatType.LIE_SEAT, true, 2));
-        seatsConfiguration.add(new Seat(SeatType.SIT_SEAT, true, 3));
-        seatsConfiguration.add(new Seat(SeatType.SIT_SEAT, true, 4));
-        seatsConfiguration.add(new Seat(SeatType.SIT_SEAT, true, 5));
-        seatsConfiguration.add(new Seat(SeatType.STAY_SEAT, true, 6));
-        seatsConfiguration.add(new Seat(SeatType.STAY_SEAT, true, 7));
+
+        int id = 1;
+
+        for (int i = 0; i < lieSeatNumber; i++) {
+            seatsConfiguration.add(new Seat(SeatType.LIE_SEAT, true, id++));
+        }
+
+        for (int i = 0; i < sitSeatNumber; i++) {
+            seatsConfiguration.add(new Seat(SeatType.SIT_SEAT, true, id++));
+        }
+
+        for (int i = 0; i < staySeatNumber; i++) {
+            seatsConfiguration.add(new Seat(SeatType.STAY_SEAT, true, id++));
+        }
+
         return seatsConfiguration;
     }
 
