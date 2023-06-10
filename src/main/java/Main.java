@@ -1,7 +1,9 @@
+import sort.SortPassengersByAge;
 import sort.SortPassengersByFinishStation;
 import transport.Passenger;
 import transport.Station;
 import transport.Transport;
+import transport.TransportSitter;
 
 import java.util.ArrayList;
 
@@ -13,7 +15,9 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Station> stations = new Main().generateStations();
 
-        Transport transport = new Transport(stations, new SortPassengersByFinishStation());
+        Transport transport = new Transport(stations, new TransportSitter(
+                new SortPassengersByAge(), new SortPassengersByFinishStation()
+        ));
 
         transport.run();
     }
