@@ -12,5 +12,4 @@ public class SeatsConfigurator {
         }
         return seatsByType;
     }
-
 }

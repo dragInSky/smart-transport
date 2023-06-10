@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Transport {
     private final TransportSitter transportSitter;
-    private final int numberOfSeats = 11;
+    private final int numberOfSeats;
     private final ArrayList<Seat> seatsConfiguration;
     private final ArrayList<Passenger> passengers = new ArrayList<>();
     private final ArrayList<Station> stations;
@@ -19,6 +19,7 @@ public class Transport {
         this.stations = stations;
         this.transportSitter = transportSitter;
         this.seatsConfiguration = seatsConfiguration;
+        numberOfSeats = seatsConfiguration.size();
     }
 
     public void run() {
