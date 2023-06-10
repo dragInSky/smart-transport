@@ -9,7 +9,7 @@ public class SortPassengersByFinishStation extends SortPassengersByParameters {
         int n = passengers.size();
         for (int i = 0; i < n; i++) {
             for (int j = 1; j < n - i; j++) {
-                if (passengers.get(j - 1).finishStationNum() > passengers.get(j).finishStationNum()) {
+                if (passengers.get(j - 1).getFinishStationNum() > passengers.get(j).getFinishStationNum()) {
                     swap(passengers, j - 1, j);
                 }
             }
