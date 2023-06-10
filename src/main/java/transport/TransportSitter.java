@@ -34,6 +34,8 @@ public class TransportSitter {
             for (Seat seat : seatsConfiguration){
                 if (passenger.futureSeatType == seat.type && seat.is_empty) {
                     passenger.seat = seat;
+                    passenger.seat.is_empty = false;
+                    break;
                 }
             }
         }
