@@ -1,6 +1,5 @@
 package transport;
 
-import sort.ISortPassengers;
 import ui.ConsolePrint;
 
 import java.util.ArrayList;
@@ -10,14 +9,17 @@ import java.util.ArrayList;
  * @since 14.05.2023
  */
 public class Transport {
-    private final int numberOfSeats = 11;
-    private final ISortPassengers sorter;
+    private final TransportSitter transportSitter;
+    private final int numberOfSeats;
+    private final ArrayList<Seat> seatsConfiguration;
     private final ArrayList<Passenger> passengers = new ArrayList<>();
     private final ArrayList<Station> stations;
 
-    public Transport(ArrayList<Station> stations, ISortPassengers sorter) {
+    public Transport(ArrayList<Station> stations, TransportSitter transportSitter, ArrayList<Seat> seatsConfiguration) {
         this.stations = stations;
-        this.sorter = sorter;
+        this.transportSitter = transportSitter;
+        this.seatsConfiguration = seatsConfiguration;
+        numberOfSeats = seatsConfiguration.size();
     }
 
     public void run() {
@@ -25,7 +27,7 @@ public class Transport {
         for (Station station : stations) {
             unload(station);
             load(station);
-            sorter.sort(passengers);
+            transportSitter.arrangement(passengers, seatsConfiguration);
             ConsolePrint.stationStatePrint(station, passengers, numberOfSeats);
         }
     }
@@ -33,7 +35,7 @@ public class Transport {
     private void unload(Station station) {
         ArrayList<Passenger> outComingPassengers = new ArrayList<>();
         for (Passenger passenger : passengers) {
-            if (passenger.finishStationNum() == station.number()) {
+            if (passenger.getFinishStationNum() == station.number()) {
                 outComingPassengers.add(passenger);
             }
         }
